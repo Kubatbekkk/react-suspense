@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react"
+import { useResource } from "./resource"
+import { Posts } from "./Posts"
+import { Users } from "./Users"
 
 function App() {
+  const resource = useResource()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Suspense for Data Fetching</h1>
+
+      {/* <Suspense fallback={<p>Loading posts...</p>}>
+        <Posts resource={resource} />
+      </Suspense>
+      <Suspense fallback={<p>Loading users...</p>}>
+        <Users resource={resource} />
+      </Suspense> */}
+
+      <Suspense fallback={<p>Loading...</p>}>
+        <Posts resource={resource} />
+        <Users resource={resource} />
+      </Suspense>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
